@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 public class SimpleCopy {
 	public static final File ONTOLOGY_LOCATION = new File("/Users/tredmond/work/Shared/ontologies/NCI/Thesaurus-11.01e-fixed-annotations.owl");
@@ -15,7 +16,7 @@ public class SimpleCopy {
 	public static void main(String[] args) throws IOException {
 		long startTime = System.currentTimeMillis();
 		InputStream is = new BufferedInputStream(new FileInputStream(ONTOLOGY_LOCATION));
-		File tmpFile = File.createTempFile("Performance", ".test");
+		File tmpFile = Files.createTempFile("Performance", ".test").toFile();
 		OutputStream os = new BufferedOutputStream(new FileOutputStream(tmpFile));
 		int c;
 		while ((c = is.read()) >= 0) {

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public class FormatTest {
     
     @Test
     public void testSerialization() throws IOException {
-        File serializedFile = File.createTempFile("FormatTest", ".ser");
+        File serializedFile = Files.createTempFile("FormatTest", ".ser").toFile();
         List<OWLOntologyChange> changes = getChanges();
         writeChanges(changes, serializedFile);
         List<OWLOntologyChange> changes2 = readChanges(serializedFile);
@@ -57,7 +58,7 @@ public class FormatTest {
     
     @Test
     public void testCompressedSerialization() throws IOException {
-        File serializedFile = File.createTempFile("FormatTest", ".ser");
+        File serializedFile = Files.createTempFile("FormatTest", ".ser").toFile();
         List<OWLOntologyChange> changes = getChanges();
         writeChangesWithCompression(changes, serializedFile);
         List<OWLOntologyChange> changes2 = readChanges(serializedFile);

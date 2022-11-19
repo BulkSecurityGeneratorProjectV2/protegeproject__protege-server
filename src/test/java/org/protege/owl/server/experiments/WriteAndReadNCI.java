@@ -2,6 +2,7 @@ package org.protege.owl.server.experiments;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,7 +124,7 @@ public class WriteAndReadNCI {
     }
     
     private static File getTempFile() throws IOException {
-        return File.createTempFile("Thesaurus", ".history");
+        return Files.createTempFile("Thesaurus", ".history").toFile();
         // return new File("/Users/tredmond/work/Shared/tmp" + (fileCounter++) + ".history");
     }
 }

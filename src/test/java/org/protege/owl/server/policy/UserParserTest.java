@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Files;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -35,7 +36,7 @@ public class UserParserTest {
     
     private void roundTripTest(String fileName) throws FileNotFoundException, RecognitionException, IOException {
         UserDatabase p = parseUserDatabase(fileName);
-        File tmp = File.createTempFile("UserDb", ".policy");
+        File tmp = Files.createTempFile("UserDb", ".policy").toFile();
         Writer tmpWriter = new FileWriter(tmp);
         try {
             p.write(tmpWriter);

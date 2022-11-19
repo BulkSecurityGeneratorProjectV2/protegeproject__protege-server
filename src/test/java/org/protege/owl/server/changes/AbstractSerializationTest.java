@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +72,7 @@ public abstract class AbstractSerializationTest {
 		OntologyDocumentRevision revision2 = new OntologyDocumentRevision(4);
 		ChangeHistory doc2 = documentFactory.createChangeDocument(changes2, null, revision2);
 		
-		File tmp = File.createTempFile("ServerTest", ".ser");
+		File tmp = Files.createTempFile("ServerTest", ".ser").toFile();
 		logs.debug("Using file " + tmp);
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(tmp));
 		out.writeObject(doc1);
@@ -108,7 +109,7 @@ public abstract class AbstractSerializationTest {
 		OntologyDocumentRevision revision2 = new OntologyDocumentRevision(4);
 		ChangeHistory doc4 = documentFactory.createChangeDocument(changes2, null, revision2);
 		
-		File tmp = File.createTempFile("ServerTest", ".ser");
+		File tmp = Files.createTempFile("ServerTest", ".ser").toFile();
 		logs.debug("Using file " + tmp);
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(tmp));
 		Integer int1 = new Integer(42);
@@ -183,7 +184,7 @@ public abstract class AbstractSerializationTest {
 		DocumentFactory docFactory = createDocumentFactory();
 		ChangeHistory doc = docFactory.createChangeDocument(changes, null, new OntologyDocumentRevision(r.nextInt(500)));
 		
-		File tmp = File.createTempFile("ServerTest", ".ser");
+		File tmp = Files.createTempFile("ServerTest", ".ser").toFile();
 		logs.debug("Using file " + tmp);
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(tmp));
 		out.writeObject(doc);
@@ -215,7 +216,7 @@ public abstract class AbstractSerializationTest {
     
     protected void testCroppedRoundTrip(ChangeHistory doc, OntologyDocumentRevision start, OntologyDocumentRevision end) throws IOException {
         DocumentFactory factory = doc.getDocumentFactory();
-        File testFile = File.createTempFile("AlignmentRT", ChangeHistory.CHANGE_DOCUMENT_EXTENSION);
+        File testFile = Files.createTempFile("AlignmentRT", ChangeHistory.CHANGE_DOCUMENT_EXTENSION).toFile();
         FileOutputStream fos = new FileOutputStream(testFile);
         doc.writeChangeDocument(fos);
         fos.flush();

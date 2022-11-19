@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,7 +18,7 @@ public class SimpleTest {
     @Test
     public static void testInt() throws IOException {
         int i = 128 + 256 + 512;
-        File tmp = File.createTempFile("SimpleTest", ".ser");
+        File tmp = Files.createTempFile("SimpleTest", ".ser").toFile();
         OutputStream os = new FileOutputStream(tmp);
         IOUtils.writeInt(os, i);
         os.flush();

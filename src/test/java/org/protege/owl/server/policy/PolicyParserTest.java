@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.*;
+import java.nio.file.Files;
 
 import static org.protege.owl.server.TestUtilities.*;
 
@@ -46,7 +47,7 @@ public class PolicyParserTest {
     
     private void roundTripTest(String fileName) throws RecognitionException, IOException {
         Policy p = parsePolicy(fileName);
-        File tmp = File.createTempFile("Policy", ".policy");
+        File tmp = Files.createTempFile("Policy", ".policy").toFile();
         Writer tmpWriter = new FileWriter(tmp);
         try {
             p.write(tmpWriter);
